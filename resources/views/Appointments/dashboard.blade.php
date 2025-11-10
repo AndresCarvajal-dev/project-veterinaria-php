@@ -130,9 +130,11 @@
             <a href="{{ route('appointments.index') }}" class="btn btn-outline-success">
                 <i class="bi bi-calendar-heart me-1"></i> Ver Citas
             </a>
-            <a href="{{ route('productos.index') }}" class="btn btn-outline-primary">
-                <i class="bi bi-box-seam me-1"></i> Productos
-            </a>
+            @if(auth()->user()->isAdmin())
+                <a href="{{ route('productos.index') }}" class="btn btn-outline-primary">
+                    <i class="bi bi-box-seam me-1"></i> Productos
+                </a>
+            @endif
             <a href="{{ route('login.form') }}" class="btn btn-outline-secondary">
                 <i class="bi bi-box-arrow-left me-1"></i> Cerrar Sesión
             </a>
@@ -142,6 +144,13 @@
     @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <i class="bi bi-check-circle-fill me-2"></i>{{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+    @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ session('error') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     @endif

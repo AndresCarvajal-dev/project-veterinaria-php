@@ -8,11 +8,6 @@ use App\Http\Controllers\AppointmentController;
 // Página de inicio: login
 Route::get('/', [LoginController::class, 'showLoginForm'])->name('home');
 
-// CRUD de productos
-Route::get('/productos', [ProductController::class, 'index'])->name('productos.home');
-Route::resource('productos', ProductController::class);
-Route::get('productos/{producto}/pdf', [ProductController::class, 'showPdf'])->name('productos.pdf');
-
 // Autenticación
 Route::get('/register', [RegisterController::class, 'showForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
@@ -28,9 +23,11 @@ Route::middleware('auth')->group(function () {
     Route::post('appointments/{appointment}/confirm', [AppointmentController::class, 'confirm'])->name('appointments.confirm');
     Route::post('appointments/{appointment}/complete', [AppointmentController::class, 'complete'])->name('appointments.complete');
 
-    // CRUD de productos
-    Route::get('/productos', [ProductController::class, 'index'])->name('productos.home');
-    Route::resource('productos', ProductController::class);
-    Route::get('productos/{producto}/pdf', [ProductController::class, 'showPdf'])->name('productos.pdf');
+    // Rutas de productos solo para administradores
+    Route::middleware('admin')->group(function () {
+        Route::get('/productos', [ProductController::class, 'index'])->name('productos.home');
+        Route::resource('productos', ProductController::class);
+        Route::get('productos/{producto}/pdf', [ProductController::class, 'showPdf'])->name('productos.pdf');
+    });
 });
 

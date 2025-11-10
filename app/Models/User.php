@@ -23,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'rol',
     ];
 
     /**
@@ -62,5 +63,21 @@ class User extends Authenticatable
     public function products()
     {
         return $this->hasMany(\App\Models\Product::class);
+    }
+
+    /**
+     * Verifica si el usuario es administrador
+     */
+    public function isAdmin()
+    {
+        return $this->rol === 'admin';
+    }
+
+    /**
+     * Verifica si el usuario es un usuario regular
+     */
+    public function isUser()
+    {
+        return $this->rol === 'user';
     }
 }

@@ -125,9 +125,11 @@
             <a href="{{ route('appointments.create') }}" class="btn btn-success">
                 <i class="bi bi-plus-circle me-1"></i> Nueva Cita
             </a>
-            <a href="{{ route('productos.index') }}" class="btn btn-outline-primary">
-                <i class="bi bi-box-seam me-1"></i> Productos
-            </a>
+            @if(auth()->user()->isAdmin())
+                <a href="{{ route('productos.index') }}" class="btn btn-outline-primary">
+                    <i class="bi bi-box-seam me-1"></i> Productos
+                </a>
+            @endif
             <a href="{{ route('login.form') }}" class="btn btn-outline-secondary">
                 <i class="bi bi-box-arrow-left me-1"></i> Cerrar Sesión
             </a>
