@@ -1,61 +1,131 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🐾 VeterinariaApp - Sistema de Gestión Veterinaria
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**VeterinariaApp** es una aplicación web desarrollada en **Laravel** que permite la gestión integral de una veterinaria.  
+Incluye módulos para **agendar citas**, **gestionar productos**, **registrar clientes y mascotas**, y un **dashboard administrativo** para el control general del negocio.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Características principales
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- 🗓️ **Agenda de citas:** registro, edición, cancelación y seguimiento de citas.
+- 🧍 **Gestión de clientes y mascotas:** CRUD completo para clientes, veterinarios y mascotas.
+- 💊 **Gestión de productos:** control de inventario, precios, categorías y stock.
+- 📊 **Dashboard administrativo:** vista general de estadísticas y métricas de la veterinaria.
+- 🔐 **Autenticación de usuarios:** registro, inicio de sesión y control de roles (administrador / empleado).
+- 💾 **Base de datos relacional:** implementada en MySQL o PostgreSQL.
+- 📱 **Interfaz moderna y responsiva** con Blade y Bootstrap/Tailwind.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🧩 Tecnologías utilizadas
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+| Tipo | Tecnología |
+|------|-------------|
+| Lenguaje principal | PHP 8.x |
+| Framework backend | Laravel 10 |
+| Base de datos | MySQL / PostgreSQL |
+| Frontend | Blade, Bootstrap / TailwindCSS |
+| Servidor local | XAMPP / Laravel Sail |
+| Control de versiones | Git / GitHub |
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## ⚙️ Instalación y configuración
 
-## Laravel Sponsors
+### 1️⃣ Clonar el repositorio
+```bash
+git clone https://github.com/AndresCarvajal-dev/project-veterinaria-php
+cd veterinariaapp
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 2️⃣ Instalar dependencias de Laravel
+```bash
+composer install
+npm install && npm run dev
+```
 
-### Premium Partners
+### 3️⃣ Configurar el archivo `.env`
+Copia el archivo de ejemplo y ajusta los parámetros de conexión:
+```bash
+cp .env.example .env
+```
+Edita las siguientes variables según tu entorno:
+```
+APP_NAME=VeterinariaApp
+APP_URL=http://localhost:8000
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=postgres
+DB_USERNAME=admin
+DB_PASSWORD=admin123
+```
 
-## Contributing
+### 4️⃣ Generar la clave de la aplicación
+```bash
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 5️⃣ Ejecutar las migraciones y seeders
+```bash
+php artisan migrate --seed
+```
 
-## Code of Conduct
+### 6️⃣ Levantar el servidor local
+```bash
+php artisan serve
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Abre tu navegador en [http://localhost:8000](http://localhost:8000)
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 🧑‍💻 Roles y permisos
 
-## License
+- **Administrador:** puede acceder a todos los módulos, CRUDs y reportes.  
+- **Empleado / Veterinario:** puede registrar citas y gestionar mascotas y productos según permisos asignados.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+## 🗃️ Estructura del proyecto (carpetas principales)
+
+```
+app/
+├── Http/
+│   ├── Controllers/     # Controladores principales
+│   └── Middleware/
+├── Models/              # Modelos Eloquent
+database/
+├── migrations/          # Migraciones de la base de datos
+├── seeders/             # Datos iniciales
+resources/
+├── views/               # Vistas Blade
+├── css / js             # Archivos front-end
+routes/
+└── web.php              # Rutas principales
+```
+
+---
+
+## 🧠 Autores y créditos
+
+**Desarrollado por:**  
+👨‍💻 Andres carvajal - Jhon carvajal - Santiago grueso   
+📧 afelipecarvajal@estudiante.uniajc.edu.co
+📧 jedisoncarvajal@estudiante.uniajc.edu.co 
+📧 sagrueso@estudiante.uniajc.edu.co 
+📅 Proyecto integrador - UNIAJC
+
+---
+
+## 🪪 Licencia
+
+Este proyecto está bajo la licencia **MIT**, lo que permite su uso, modificación y distribución libre con fines educativos o comerciales.
+
+---
+
+## 💬 Contacto
+
+Si tienes preguntas o sugerencias, no dudes en contactarme.  
+¡Toda contribución es bienvenida! 🐶🐱
