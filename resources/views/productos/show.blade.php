@@ -49,7 +49,7 @@
     </div>
 
     <div class="card-footer bg-white d-flex justify-content-between">
-        <a href="{{ route('home') }}" class="btn btn-outline-secondary" aria-label="Volver al inicio">
+        <a href="{{ route('productos.index') }}" class="btn btn-outline-secondary" aria-label="Volver al inicio">
             <i class="bi bi-arrow-left"></i> Volver
         </a>
 

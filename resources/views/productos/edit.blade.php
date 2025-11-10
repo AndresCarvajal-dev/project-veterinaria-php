@@ -80,7 +80,7 @@
             </div>
 
             <div class="d-flex justify-content-between mt-4">
-                <a href="{{ route('home') }}" class="btn btn-outline-secondary">
+                <a href="{{ route('productos.index') }}" class="btn btn-outline-secondary">
                     <i class="bi bi-arrow-left"></i> Volver
                 </a>
 

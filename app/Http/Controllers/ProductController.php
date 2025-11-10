@@ -51,7 +51,7 @@ class ProductController extends Controller
         ]);
 
         Product::create($request->all());
-        return redirect()->route('home')->with('success', 'Producto creado correctamente.');
+        return redirect()->route('productos.index')->with('success', 'Producto creado correctamente.');
     }
 
     public function edit($id)
@@ -64,13 +64,13 @@ class ProductController extends Controller
     {
         $producto = Product::findOrFail($id);
         $producto->update($request->all());
-        return redirect()->route('home')->with('success', 'Producto actualizado correctamente.');
+        return redirect()->route('productos.index')->with('success', 'Producto actualizado correctamente.');
     }
 
     public function destroy($id)
     {
         Product::findOrFail($id)->delete();
-        return redirect()->route('home')->with('success', 'Producto eliminado correctamente.');
+        return redirect()->route('productos.index')->with('success', 'Producto eliminado correctamente.');
     }
 
 
