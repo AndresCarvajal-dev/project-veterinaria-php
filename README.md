@@ -94,11 +94,9 @@ Abre tu navegador en [http://localhost:8000](http://localhost:8000)
 app/
 ├── Http/
 │   ├── Controllers/     # Controladores principales
-│   └── Middleware/
 ├── Models/              # Modelos Eloquent
 database/
 ├── migrations/          # Migraciones de la base de datos
-├── seeders/             # Datos iniciales
 resources/
 ├── views/               # Vistas Blade
 ├── css / js             # Archivos front-end
