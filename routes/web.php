@@ -19,13 +19,18 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 
-// CRUD de productos
-Route::resource('productos', ProductController::class)->except(['show']);
+// Rutas protegidas (requieren autenticación)
+Route::middleware('auth')->group(function () {
+    // Dashboard y CRUD de citas veterinarias
+    Route::get('/dashboard', [AppointmentController::class, 'dashboard'])->name('dashboard');
+    Route::resource('appointments', AppointmentController::class);
+    Route::post('appointments/{appointment}/cancel', [AppointmentController::class, 'cancel'])->name('appointments.cancel');
+    Route::post('appointments/{appointment}/confirm', [AppointmentController::class, 'confirm'])->name('appointments.confirm');
+    Route::post('appointments/{appointment}/complete', [AppointmentController::class, 'complete'])->name('appointments.complete');
 
-// Dashboard y CRUD de citas veterinarias
-Route::get('/dashboard', [AppointmentController::class, 'dashboard'])->name('dashboard');
-Route::resource('appointments', AppointmentController::class);
-Route::post('appointments/{appointment}/cancel', [AppointmentController::class, 'cancel'])->name('appointments.cancel');
-Route::post('appointments/{appointment}/confirm', [AppointmentController::class, 'confirm'])->name('appointments.confirm');
-Route::post('appointments/{appointment}/complete', [AppointmentController::class, 'complete'])->name('appointments.complete');
+    // CRUD de productos
+    Route::get('/productos', [ProductController::class, 'index'])->name('productos.home');
+    Route::resource('productos', ProductController::class);
+    Route::get('productos/{producto}/pdf', [ProductController::class, 'showPdf'])->name('productos.pdf');
+});
 

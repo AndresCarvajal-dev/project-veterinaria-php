@@ -13,12 +13,15 @@ class AppointmentController extends Controller
      */
     public function dashboard()
     {
-        $totalCitas = Appointment::count();
-        $citasPendientes = Appointment::where('estado', 'pendiente')->count();
-        $citasConfirmadas = Appointment::where('estado', 'confirmada')->count();
-        $citasHoy = Appointment::whereDate('fecha', today())->count();
+        $userId = auth()->id();
         
-        $proximasCitas = Appointment::where('fecha', '>=', today())
+        $totalCitas = Appointment::where('user_id', $userId)->count();
+        $citasPendientes = Appointment::where('user_id', $userId)->where('estado', 'pendiente')->count();
+        $citasConfirmadas = Appointment::where('user_id', $userId)->where('estado', 'confirmada')->count();
+        $citasHoy = Appointment::where('user_id', $userId)->whereDate('fecha', today())->count();
+        
+        $proximasCitas = Appointment::where('user_id', $userId)
+                                    ->where('fecha', '>=', today())
                                     ->whereIn('estado', ['pendiente', 'confirmada'])
                                     ->orderBy('fecha', 'asc')
                                     ->orderBy('hora', 'asc')
@@ -39,7 +42,8 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        $appointments = Appointment::orderBy('fecha', 'desc')
+        $appointments = Appointment::where('user_id', auth()->id())
+                                   ->orderBy('fecha', 'desc')
                                    ->orderBy('hora', 'desc')
                                    ->paginate(10);
         return view('Appointments.index', compact('appointments'));
@@ -95,7 +99,8 @@ class AppointmentController extends Controller
         }
 
         // Verificar disponibilidad de la cita
-        $citaExistente = Appointment::where('fecha', $request->fecha)
+        $citaExistente = Appointment::where('user_id', auth()->id())
+            ->where('fecha', $request->fecha)
             ->where('hora', $request->hora)
             ->where('estado', '!=', 'cancelada')
             ->first();
@@ -106,8 +111,10 @@ class AppointmentController extends Controller
                 ->withInput();
         }
 
-        // Crear la cita
-        $appointment = Appointment::create($request->all());
+        // Crear la cita asociada al usuario autenticado
+        $appointment = Appointment::create(array_merge($request->all(), [
+            'user_id' => auth()->id()
+        ]));
 
         return redirect()->route('appointments.index')
             ->with('success', '¡Cita agendada exitosamente! Recibirá un correo de confirmación pronto.');

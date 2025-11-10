@@ -47,4 +47,20 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Relación con las citas del usuario
+     */
+    public function appointments()
+    {
+        return $this->hasMany(\App\Models\Appointment::class);
+    }
+
+    /**
+     * Relación con los productos del usuario
+     */
+    public function products()
+    {
+        return $this->hasMany(\App\Models\Product::class);
+    }
 }

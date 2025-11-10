@@ -15,6 +15,7 @@ class Appointment extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'user_id',
         'nombre_dueno',
         'telefono',
         'email',
@@ -38,6 +39,14 @@ class Appointment extends Model
     protected $casts = [
         'fecha' => 'date',
     ];
+
+    /**
+     * Relación con el usuario
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     /**
      * Obtener el nombre completo de la cita (propietario - mascota)

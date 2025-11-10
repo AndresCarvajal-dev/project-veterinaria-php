@@ -9,9 +9,7 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        $productos = Product::all();
-
-          $query = Product::query();
+        $query = Product::where('user_id', auth()->id());
       
         if ($request->filled('q')) {
             $query->where('nombre', 'like', '%' . $request->q . '%');
@@ -50,7 +48,9 @@ class ProductController extends Controller
             'stock'  => 'required|integer|min:0',
         ]);
 
-        Product::create($request->all());
+        Product::create(array_merge($request->all(), [
+            'user_id' => auth()->id()
+        ]));
         return redirect()->route('productos.index')->with('success', 'Producto creado correctamente.');
     }
 
